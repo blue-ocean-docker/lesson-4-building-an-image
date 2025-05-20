@@ -20,3 +20,9 @@ docker run -it --rm -p9000:80 -v $(pwd):/var/www blue-ocean-docker-lesson-4
 ```
 
 `-v` specifies a volume mount. The left side of the `:` specifies the location in your local filesystem, and the right side of the `:` specifies _where_ to mount it in the running container. `pwd` in POSIX shells prints out the current working directory.
+
+Of course, if you mount your local dev directory into the running container, you might notice that there are no styles anymore. That's because you'll need to run the Tailwind CSS build — which is done inside the Docker image build for the static image.
+
+To run the Tailwind build in local dev, use the command: `npx @tailwindcss/cli -i ./assets/style.css -o ./public/style.css`
+
+Or you can have the tailwind CLI continuously watch for changes as you dev: `npx @tailwindcss/cli -i ./assets/style.css -o ./public/style.css --watch`
